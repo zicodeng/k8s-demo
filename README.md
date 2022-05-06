@@ -202,3 +202,17 @@ Make sure AWS creds are configured before using `kubectl`.
 export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
 ```
+
+### `Error: failed to delete cluster with nodegroup(s)` When Deleting EKS Cluster?
+
+More details about this error can be found on CloudFormation page:
+
+```
+resource sg-0a287096ddf1bdf49 has a dependent object (Service: AmazonEC2; Status Code: 400; Error Code: DependencyViolation; Request ID: b9adcce2-30b4-406c-9907-ea05ea2342c9; Proxy: null)
+```
+
+[Solution](https://stackoverflow.com/a/63774014/7124935):
+
+- Go to EC2 > Network Interfaces.
+- Sort by VPC, find the interfaces assigned to your VPC
+- The interface to delete should be the only one that is "available", it should also be the only one assigned to the problematic remote access SG. If more than one interface matches this description, delete them all.
