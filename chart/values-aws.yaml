@@ -1,0 +1,7 @@
+appName: k8s-demo
+imageName: 515107297873.dkr.ecr.us-west-2.amazonaws.com/k8s-demo:latest
+imagePullSecretName: k8s-demo
+serviceName: k8s-demo-svc
+servicePort: 8080
+# On EKS, the maximum number of pods per node depends on the node type and ranges from 4 to 737.
+replicas: 2

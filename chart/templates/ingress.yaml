@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.appName }}
+  # For EKS ingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/scheme: internet-facing
+spec:
+  rules:
+    # - host: {{ .Values.serviceAddress }} // for local cluster testing only. When creating this LB in AWS, it will create a DNS record for us.
+    - http:
+        paths:
+          - backend:
+              service:
+                name: {{ .Values.serviceName }}
+                port:
+                  number: {{ .Values.servicePort }}
+            path: /
+            pathType: Prefix

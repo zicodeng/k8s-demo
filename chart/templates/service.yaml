@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.appName }}
+  # Services cannot have DNS records in them. They must be DNS labels, i.e. without any top-level domains, like ".com" or ".org".
+  name: {{ .Values.serviceName }}
+spec:
+  ports:
+    - name: http
+      port: {{ .Values.servicePort }}
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: {{ .Values.appName }}
+  # type: ClusterIP // for local nginx ingress
+  type: NodePort

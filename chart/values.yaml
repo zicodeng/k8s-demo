@@ -1,0 +1,6 @@
+appName: k8s-demo
+imageName: localhost:5000/k8s-demo
+serviceName: k8s-demo-svc
+serviceAddress: k8s-demo.com
+servicePort: 8080
+replicas: 2
